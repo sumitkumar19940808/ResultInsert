@@ -1,41 +1,68 @@
 package lucky4;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UniqueNumberReturn {
 	
 //	public static void main(String args[]) {
 //		unique();
 //	}
-	public static ArrayList<Integer> unique() {
-		ArrayList<Integer> arrli = new ArrayList<Integer>();
+	public static ArrayList<Integer> unique(){
+		Set<Integer> arrli = new HashSet<Integer>();
 		int count =20;
 		for(int i=0; i<count ; i++) {
 			String randomNumber = uninum();
 			int result = Integer.parseInt(randomNumber);
 			if(result >=1000 && result <=2999) {
 				arrli.add(result);
-//				System.out.println(i);
-				
+				//System.out.println(i);
 			}else {
 				if(arrli.size()<=20) {
 					count = count +1;
 				}else {
 					break;
 				}
-			}
-				
+			}		
 		}
+		List list = new ArrayList(arrli);
+		System.out.println(list);
+		return (ArrayList<Integer>) list;
+	}
+//	public static ArrayList<Integer> unique() {
+//		ArrayList<Integer> arrli = new ArrayList<Integer>();
+//		int count =20;
+//		for(int i=0; i<count ; i++) {
+//			String randomNumber = uninum();
+//			int result = Integer.parseInt(randomNumber);
+//			if(result >=1000 && result <=2999) {
+//				arrli.add(result);
+//				System.out.println(i);
+				
+//			}else {
+//				if(arrli.size()<=20) {
+//					count = count +1;
+//				}else {
+//					break;
+//				}
+//			}
+//				
+//		}
 //		System.out.println(arrli);
 //	    if
-		return arrli;
-	}
+//		return arrli;
+//	}
 	public static String uninum() {
 		Random r = new Random();
 		String randomNumber = String.format("%04d", Integer.valueOf(r.nextInt(2999)));
@@ -91,5 +118,13 @@ public class UniqueNumberReturn {
 			elem.sendKeys(firstPrizeNumber);
 		}
 		return firstPrizeNumber;
+	}
+	public static boolean checkalert(WebElement ele) {
+		String text = ele.getText();
+		System.out.println(text);
+		if(text.equals("Winning Number"))
+			return true;
+		else
+		return false;
 	}
 }
