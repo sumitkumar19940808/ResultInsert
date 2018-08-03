@@ -31,7 +31,7 @@ public class LuckyFour_Live extends UniqueNumberReturn {
 	Scanner sc = new Scanner(System.in);
 	AtomicInteger sequence = new AtomicInteger(0);
 	ArrayList<Integer> alli;
-	int index = 4;
+	int index = 12;
 	@BeforeSuite
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "/home/sumitkumar/workspace/DataCompare/plugin/chromedriver_linux64/chromedriver");
@@ -64,16 +64,9 @@ public class LuckyFour_Live extends UniqueNumberReturn {
 	  driver.switchTo().frame("div_middlecontent");
 	  driver.findElement(By.id("dtpDrawDate")).click();
 	  driver.findElement(By.cssSelector(".ui-state-highlight")).click();
-	  for(int i=0;i<1;i++) {
+	  for(int i=index;i<=20;i++) {
 		  Select selectDrawTime = new Select(driver.findElement(By.id("combolottime")));
 		  int count =i;
-		  try {
-			  selectDrawTime.selectByIndex(count);
-		  }catch(ElementNotVisibleException e) {
-			  JavascriptExecutor je = (JavascriptExecutor) driver;
-			  WebElement element = driver.findElement(By.tagName("...."));
-			  je.executeScript("arguments[0].scrollIntoView(true);",element);
-		  }
 		  selectDrawTime.selectByIndex(count);
 	//	  checkResultIn();
 	//	  System.out.println("ok1");
@@ -156,7 +149,7 @@ public class LuckyFour_Live extends UniqueNumberReturn {
 //		  }
 	 }
   }
-//  @Test(priority=4,invocationCount=2)
+  //  @Test(priority=4,invocationCount=2)
   public void insertRes() throws InterruptedException {
 	  int value = 0;
 		int value1 = 0;
@@ -215,22 +208,6 @@ public class LuckyFour_Live extends UniqueNumberReturn {
 		  Thread.sleep(1000);
 	//	  driver.findElement(By.id("popup_ok")).click();
 	  }
-	  for(int i=0 ; i<20; i++) {
-		  int temp=i;
-		  String code = Integer.toString(temp+1);
-		  Integer num = alli.get(i);
-		  String number = Integer.toString(num);
-		  driver.findElement(By.id("winno_3_"+code)).sendKeys(number);
-	  }
-	  System.out.println(alli);
-	  WebElement textbox = driver.findElement(By.id("winno_3_20"));
-	  textbox.sendKeys(Keys.ENTER);
-	  
-	  driver.findElement(By.id("btnSubmit")).click();
-	  Thread.sleep(5000);
-	  driver.findElement(By.id("popup_ok")).click();
-	  Thread.sleep(1000);
-//	  driver.findElement(By.id("popup_ok")).click();
 	  
   }
 }

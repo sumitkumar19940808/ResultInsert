@@ -17,7 +17,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class UniqueNumberReturn {
 	
 //	public static void main(String args[]) {
-//		unique();
+//		
+//		for(int i=0;i<=50;i++) {
+//			ArrayList<Integer> 	alli = unique();
+//		for(int j=0 ; j<20; j++) {
+//			  int temp=i;
+//			  String code = Integer.toString(temp+1);
+//			  Integer num = alli.get(j);
+//			  String number = Integer.toString(num);
+//			  System.out.println(j+" "+number);
+//		  }
+//		}
 //	}
 	public static ArrayList<Integer> unique(){
 		Set<Integer> arrli = new HashSet<Integer>();
