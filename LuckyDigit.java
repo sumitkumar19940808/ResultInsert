@@ -1,7 +1,11 @@
 package lucky4;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,15 +22,20 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class LuckyFour extends UniqueNumberReturn {
+public class LuckyDigit{
 	WebDriver driver;
-	String url ="http://172.20.5.3/bo/index.php";
-	String loginname ="amit";
-	String passwd = "sdla1234";
+//	String url ="http://172.20.5.3/bo/index.php";
+//	String loginname ="amit";
+//	String passwd = "sdla1234";
+	String url ="http://192.168.4.63:8080/R1backoffice/";
+	String loginname ="mondelhi";
+	String passwd = "sdla12345";
 	Scanner sc = new Scanner(System.in);
 	AtomicInteger sequence = new AtomicInteger(0);
-	ArrayList<Integer> alli;
-	int index = 4;
+	ArrayList<Integer> alli2;
+//	ArrayList<Integer> alli3;
+//	ArrayList<Integer> alli4;
+	int index = 2;
 	@BeforeSuite
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "/home/sumitkumar/workspace/DataCompare/plugin/chromedriver_linux64/chromedriver");
@@ -48,17 +57,17 @@ public class LuckyFour extends UniqueNumberReturn {
   }
   @Test(priority=1)
   public void selectResult() {
-	 WebElement ele = driver.findElement(By.id("64"));
+	 WebElement ele = driver.findElement(By.id("3"));
 	 Actions ac = new Actions(driver);
 	 ac.moveToElement(ele).build().perform();
-	 driver.findElement(By.id("onlineseries/numberresultfeed.php?description=Result Prize&menucode=1008")).click();
+	 driver.findElement(By.id("onlinedigit/numberresultfeed.php?description=Result Prize&menucode=960")).click();
   }
   @Test(priority=2)
   public void resulInsert() throws InterruptedException {
 	  driver.switchTo().frame("div_middlecontent");
 	  driver.findElement(By.id("dtpDrawDate")).click();
 	  driver.findElement(By.cssSelector(".ui-state-highlight")).click();
-	  for(int i=index;i<=8;i++) {
+	  for(int i=index;i<=2;i++) {
 		  Select selectDrawTime = new Select(driver.findElement(By.id("combolottime")));
 		  int count =i;
 		  selectDrawTime.selectByIndex(count);
@@ -145,58 +154,60 @@ public class LuckyFour extends UniqueNumberReturn {
   }
 //  @Test(priority=4,invocationCount=2)
   public void insertRes() throws InterruptedException {
-	  int value = 0;
-		int value1 = 0;
-		char letter =0;
-		char letter1 =0;
-		String firstPrizeNumber= "";
-		String secondPrizeNumber = "";
+	  String value = "";
 	  for(int j=1;j<=2;j++) {
 		  int count= j;//sequence.addAndGet(1);
 		  System.out.println(count +" count");
-		  Select numFirst = new Select(driver.findElement(By.id("seriesno_1")));
+		  WebElement numFirst = driver.findElement(By.id("winno_1_1"));
 	//	  System.out.println(value +" 1");
-		  int tempval = insertResultIn(numFirst,sc,"First",count,value);
+		  String tempval = insertResultIn(numFirst,sc,"First",count,value);
 //		  driver.quit();
 		  value = tempval;
-	//	  System.out.println(value +" 2");
-		  Select seriesFirst = new Select(driver.findElement(By.id("setsno_1")));
-		  Thread.sleep(500);
-		  char lettertemp = insertResultSer(seriesFirst,sc,"First",count,letter);
-		  letter = lettertemp;
-		  WebElement elem =driver.findElement(By.id("winno_1_1"));
-		  String hellotemp = setNum(sc,"First",elem,count,firstPrizeNumber);
-		  firstPrizeNumber = hellotemp;
 		  /*Second*/
-		  Select numSecond = new Select(driver.findElement(By.id("seriesno_2")));
-	//	  System.out.println(value1 +" 11");
-		  int tempval1 = insertResultIn(numSecond,sc,"Second",count , value1);
-		  value1 = tempval1;
-	//	  System.out.println(value1 +" 21");
-		  Select seriesSecond = new Select(driver.findElement(By.id("setsno_2")));
-		  Thread.sleep(500);
-		  char lettertemp1 = insertResultSer(seriesSecond,sc,"Second",count,letter1);
-		  letter1 = lettertemp1;
-		  WebElement elemt =driver.findElement(By.id("winno_2_1"));
-		  String hellotemp1 = setNum(sc,"Second",elemt,count,secondPrizeNumber);
-		  secondPrizeNumber = hellotemp1;
-	//	  System.out.println("Enter number for Second prize between 1000 - 2999");
-	//	  String secondPrizeNumber =sc.next();
-	//	  driver.findElement(By.id("winno_2_1")).sendKeys(secondPrizeNumber);
+		  //	  System.out.println(value1 +" 21");
 		  if(count==1) {
-			  alli = unique();
+			  alli2 = unique();
 		  }
-		  for(int i=0 ; i<20; i++) {
+		  for(int i=0 ; i<10; i++) {
 			  int temp=i;
 			  String code = Integer.toString(temp+1);
-			  Integer num = alli.get(i);
+			  Integer num = alli2.get(i);
 			  String number = Integer.toString(num);
-			  driver.findElement(By.id("winno_3_"+code)).sendKeys(number);
+//			  Thread.sleep(500);
+			  driver.findElement(By.id("winno_2_"+code)).sendKeys(number);
+		      driver.findElement(By.id("winno_2_"+code)).sendKeys(number);	  
+			  System.out.println(alli2.get(i));
 		  }
-		  System.out.println(alli);
-		  WebElement textbox = driver.findElement(By.id("winno_3_20"));
+//		  if(count==1) {
+//			  alli3 = unique();
+//		  }
+		  int temp=0;
+		  for(int i=10 ; i<30; i++) {
+			  String code = Integer.toString(temp+1);
+			  Integer num = alli2.get(i);
+			  String number = Integer.toString(num);
+//			  Thread.sleep(500);
+			  driver.findElement(By.id("winno_3_"+code)).sendKeys(number);
+			  System.out.println(alli2.get(i)+" "+i);
+			  temp++;
+		  }
+//		  System.out.println(alli3);
+//		  if(count==1) {
+//			  alli4 = unique();
+//		  }
+		  int temp1=0;
+		  for(int i=30 ; i<80; i++) {
+			  String code = Integer.toString(temp1+1);
+			  Integer num = alli2.get(i);
+			  String number = Integer.toString(num);
+//			  Thread.sleep(500);
+			  driver.findElement(By.id("winno_4_"+code)).sendKeys(number);
+			  System.out.println(alli2.get(i));
+			  temp1++;
+		  }
+//		  System.out.println(alli4);
+		  WebElement textbox = driver.findElement(By.id("winno_4_50"));
 		  textbox.sendKeys(Keys.ENTER);
-		  
 		  driver.findElement(By.id("btnSubmit")).click();
 		  Thread.sleep(5000);
 		  driver.findElement(By.id("popup_ok")).click();
@@ -205,4 +216,53 @@ public class LuckyFour extends UniqueNumberReturn {
 	  }
 	  
   }
+  public static ArrayList<Integer> unique(){
+		Set<Integer> arrli = new 	HashSet<Integer>();
+		int count =80;
+		for(int i=0; i<count ; i++) {
+			String randomNumber = uninum();
+			int result = Integer.parseInt(randomNumber);
+			if(result >=1000 && result <=9999) {
+				arrli.add(result);
+				//System.out.println(i);
+			}else {
+				if(arrli.size()<=80) {
+					count = count +1;
+				}else {
+					break;
+				}
+			}		
+		}
+		List list = new ArrayList(arrli);
+		System.out.println(list);
+		return (ArrayList<Integer>) list;
+	}
+
+  public static String uninum() {
+		Random r = new Random();
+		String randomNumber = String.format("%04d", Integer.valueOf(r.nextInt(9999)));
+		return randomNumber;
+	}
+	public static String insertResultIn(WebElement numFirst,Scanner sc , String prizeRank,int count ,String value) throws InterruptedException {
+		String num = value;
+		if(count==1) {
+			System.out.println("Enter the number between 0000000 - 9999999 for "+prizeRank+" prize");
+			num  = sc.nextLine();
+			numFirst.sendKeys(num);
+//			List<WebElement> ele = numFirst.getOptions();
+//			System.out.println(ele.size());
+		}else {
+			System.out.println("same number is : " +num);
+			numFirst.sendKeys(num);
+		}
+		return num;
+	}
+	public static boolean checkalert(WebElement ele) {
+		String text = ele.getText();
+		System.out.println(text);
+		if(text.equals("Winning Number"))
+			return true;
+		else
+		return false;
+	}
 }

@@ -31,7 +31,7 @@ public class LuckyFour_Live extends UniqueNumberReturn {
 	Scanner sc = new Scanner(System.in);
 	AtomicInteger sequence = new AtomicInteger(0);
 	ArrayList<Integer> alli;
-	int index = 12;
+	int index = 9;
 	@BeforeSuite
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "/home/sumitkumar/workspace/DataCompare/plugin/chromedriver_linux64/chromedriver");

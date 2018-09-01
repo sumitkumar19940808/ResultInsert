@@ -30,7 +30,7 @@ public class UniqueNumberReturn {
 //		}
 //	}
 	public static ArrayList<Integer> unique(){
-		Set<Integer> arrli = new HashSet<Integer>();
+		Set<Integer> arrli = new 	HashSet<Integer>();
 		int count =20;
 		for(int i=0; i<count ; i++) {
 			String randomNumber = uninum();
@@ -84,6 +84,8 @@ public class UniqueNumberReturn {
 			System.out.println("Enter the number between 00 - 99 for "+prizeRank+" prize");
 			num  = sc.nextInt();
 			numFirst.selectByIndex(num);
+//			List<WebElement> ele = numFirst.getOptions();
+//			System.out.println(ele.size());
 		}else {
 			System.out.println("same number is : " +num);
 			numFirst.selectByIndex(num);
